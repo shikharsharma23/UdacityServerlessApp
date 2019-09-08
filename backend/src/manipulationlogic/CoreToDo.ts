@@ -37,3 +37,7 @@ export function deleteToDo(todoId: string, jwtToken: string): Promise<string> {
 export function generateUploadUrl(todoId: string): Promise<string> {
     return toDoAccess.generateUploadUrl(todoId);
 }
+
+export function generateDownloadUrl(todoId: string): Promise<string> {
+    return toDoAccess.generateDownloadUrl(todoId);
+}

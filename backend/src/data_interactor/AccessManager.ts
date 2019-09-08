@@ -56,16 +56,12 @@ export class ToDoAccess {
                 "userId": userId,
                 "todoId": todoId
             },
-            UpdateExpression: "set #a = :a, #b = :b, #c = :c",
+            UpdateExpression: "set #a = :a",
             ExpressionAttributeNames: {
-                "#a": "name",
-                "#b": "dueDate",
-                "#c": "done"
+                "#a": "attachmentUrl"
             },
             ExpressionAttributeValues: {
-                ":a": todoUpdate['name'],
-                ":b": todoUpdate['dueDate'],
-                ":c": todoUpdate['done']
+                ":a": todoUpdate['attachmentUrl'],
             },
             ReturnValues: "ALL_NEW"
         };
@@ -98,6 +94,19 @@ export class ToDoAccess {
         console.log("Generating URL");
 
         const url = this.s3Client.getSignedUrl('putObject', {
+            Bucket: this.s3BucketName,
+            Key: todoId,
+            Expires: 1000,
+        });
+        console.log(url);
+
+        return url as string;
+    }
+
+    async generateDownloadUrl(todoId: string): Promise<string> {
+        console.log("Generating URL");
+
+        const url = this.s3Client.getSignedUrl('getObject', {
             Bucket: this.s3BucketName,
             Key: todoId,
             Expires: 1000,
