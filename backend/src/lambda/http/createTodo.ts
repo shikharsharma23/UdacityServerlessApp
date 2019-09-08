@@ -2,7 +2,7 @@ import 'source-map-support/register'
 
 import {APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult} from 'aws-lambda'
 import {CreateTodoRequest} from '../../requests/CreateTodoRequest';
-import {createToDo} from "../../manipulationlogic/ToDo";
+import {createToDo} from "../../manipulationlogic/CoreToDo";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // TODO: Implement creating a new TODO item
@@ -12,6 +12,8 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     const jwtToken = split[1];
 
     const newTodo: CreateTodoRequest = JSON.parse(event.body);
+
+    
     const toDoItem = await createToDo(newTodo, jwtToken);
 
     return {

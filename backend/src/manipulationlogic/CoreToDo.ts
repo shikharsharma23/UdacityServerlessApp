@@ -1,5 +1,5 @@
 import {TodoItem} from "../models/TodoItem";
-import {ToDoAccess} from "../dataLayer/ToDoAccess";
+import {ToDoAccess} from "../data_interactor/AccessManager";
 import {parseUserId} from "../auth/utils";
 import {CreateTodoRequest} from "../requests/CreateTodoRequest";
 import {UpdateTodoRequest} from "../requests/UpdateTodoRequest";

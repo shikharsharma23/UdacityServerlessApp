@@ -94,7 +94,7 @@ export class ToDoAccess {
         return "" as string;
     }
 
-    async generateUploadUrl(todoId: string): Promise<string> {
+     async generateUploadUrl(todoId: string): Promise<string> {
         console.log("Generating URL");
 
         const url = this.s3Client.getSignedUrl('putObject', {
